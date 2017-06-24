@@ -18,15 +18,20 @@ public class NetworkUtils {
     public static final String base_url=
             "https://newsapi.org/v1/articles";
 
-    public static final String query_parameter = "q";
+    public static final String source_parameter = "source";
+    public static final String sortBy_parameter = "sortBy";
+    public static final String apiKey_parameter = "apiKey";
+
+
 
     public static URL buildUrl(String locationQuery) {
 
         URL url = null;
         try {
             Uri uri = Uri.parse(base_url).buildUpon()
-                    .appendQueryParameter(query_parameter, locationQuery)
-                    .build();
+                    .appendQueryParameter(source_parameter, "the-next-web")
+                    .appendQueryParameter(sortBy_parameter, "latest")
+                    .appendQueryParameter(apiKey_parameter, locationQuery).build();
             url = new URL(uri.toString());
         }catch (MalformedURLException e){
             e.printStackTrace();

@@ -35,22 +35,26 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
         NetworkTask net = null;
 
         switch (item.getItemId()) {
-            case R.id.Refresh:
+            case R.id.refresh:
                 Log.i("Menu", "Refresh clicked");
                 net = new NetworkTask(""); // no query string, will refresh page
+                net.execute();
                 return true;
-            case R.id.Search:
+            case R.id.search:
                 Log.i("Menu", "Search clicked");
                 net = new NetworkTask("54a9ccbaf0874645903d2c513cfd9be6"); // news api key as query string
+                net.execute();
                 return true;
         }
         return super.onOptionsItemSelected(item);
+
     }
 
     class NetworkTask extends AsyncTask<URL, Void, String> {
