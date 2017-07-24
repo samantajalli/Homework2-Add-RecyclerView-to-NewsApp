@@ -1,5 +1,7 @@
 package com.example.samanimal.newsapp;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -109,9 +111,18 @@ public class MainActivity extends AppCompatActivity {
 
                             String url = data.get(clickedItemIndex).getUrl();
                             Log.d(TAG, String.format("Url %s", url));
+                            openWebPage(url);
                         }
                 });
                 rv.setAdapter(adapter);
+            }
+        }
+
+        public void openWebPage(String url) {
+            Uri webpage = Uri.parse(url);
+            Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
+            if (intent.resolveActivity(getPackageManager()) != null) {
+                startActivity(intent);
             }
         }
     }
